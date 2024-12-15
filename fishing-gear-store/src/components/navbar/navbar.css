@@ -1,0 +1,60 @@
+/* Navbar styles */
+.navbar {
+  background-color: #007bff; /* Dark blue background */
+  display: flex;
+  justify-content: space-between; /* Ensures elements are spaced out */
+  align-items: center; /* Vertically align items */
+}
+
+.navbar-brand {
+  font-size: 1.8rem; /* Increase font size for the logo */
+  color: #007bff;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  color: rgb(12, 7, 7);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffcc00; /* Yellow color on hover */
+}
+
+.navbar-toggler {
+  border: none; /* White border for the hamburger button */
+  background-color: transparent; /* Ensures background is transparent */
+}
+
+.navbar-toggler-icon {
+  background-color: white; /* White lines for the hamburger */
+}
+
+.navbar-nav {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 20px; /* Adjust if needed */
+}
+
+/* Mobile device styles */
+@media (max-width: 992px) {
+  .navbar-nav {
+    text-align: center; /* Center-align the navbar items on mobile */
+  }
+
+  .navbar-nav .nav-item {
+    margin: 5px 0; /* Add margin between menu items on mobile */
+  }
+
+  .navbar-collapse {
+    background-color: #ffffff; /* Background for the expanded menu */
+  }
+
+  .navbar-toggler {
+    margin-left: auto; /* This will push the button to the right */
+  }
+}

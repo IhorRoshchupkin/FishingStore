@@ -1,0 +1,15 @@
+/* Header.css */
+header {
+  height: 100px; /* or adjust this value as needed */
+  background-color: white; /* Optional: to ensure background color is solid */
+}
+
+.navbar {
+  padding: 10px 0; /* Adjust if needed */
+}
+
+.container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  min-height: 100px; /* Ensures there's enough space even when content is minimal */
+}
