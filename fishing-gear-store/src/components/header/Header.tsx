@@ -1,5 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./header.css";
 import Navbar from "../navbar/navbar";
+
 
 const Header = () => {
   return (
