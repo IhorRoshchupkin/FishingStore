@@ -1,11 +1,13 @@
-import Header from "./components/header/Header";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
 
 const App = () => {
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100">
       <Header />
-      <main className="container mt-4">
-      </main>
+      {/* Main content of your app */}
+      <div className="flex-grow-1">{/* Your main content here */}</div>
+      <Footer />
     </div>
   );
 };

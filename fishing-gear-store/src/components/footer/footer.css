@@ -1,0 +1,33 @@
+/* Footer styles */
+footer {
+  background-color: #343a40; /* Dark background color */
+  color: #fff; /* White text color */
+  padding: 10px 0; /* Add padding to the footer */
+  position: relative; /* Default positioning */
+}
+
+footer p {
+  font-size: 1rem; /* Adjust font size for the copyright text */
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  font-size: 0.9rem; /* Adjust font size for the footer links */
+}
+
+.footer-links a {
+  color: #ffffff; /* White text for links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.footer-links a:hover {
+  color: #ffcc00; /* Yellow color on hover */
+}
+
+footer .mx-2 {
+  color: #fff; /* White color for separators */
+}
+
+footer a:focus {
+  outline: none; /* Remove outline on focus */
+}
