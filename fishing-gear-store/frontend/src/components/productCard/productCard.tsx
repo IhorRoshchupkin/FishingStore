@@ -1,4 +1,5 @@
 import "./productCard.css";
+import React from "react";
 
 // Dummy product data
 const products = [

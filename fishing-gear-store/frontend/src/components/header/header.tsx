@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./header.css";
 import Navbar from "../navbar/navbar";
-
+import React from "react";
 
 const Header = () => {
   return (
