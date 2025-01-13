@@ -1,5 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Navbar.css";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -62,8 +64,13 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
+              <a className="nav-link" href="/products">
+                All Products
+              </a>
+            </li>
+            <li className="nav-item">
               <a className="nav-link text-danger" href="#">
-                Clearance
+                Sales
               </a>
             </li>
           </ul>

@@ -1,48 +1,20 @@
 const express = require("express");
-const bodyParser = require("express"); // Middleware to parse JSON and URL-encoded data
+const bodyParser = require("body-parser"); // This is used to parse URL-encoded data, if needed
 const app = express();
 const PORT = 5000;
-const productRoutes = require("./productRoutes");
+const productRoutes = require("./routes/productRoutes"); // Ensure correct path for productRoutes
+const cors = require("cors");
+
+app.use(cors());
 
 // Middleware
 app.use(express.json()); // Parse incoming JSON data
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+
+// Use the routes for products under "/api"
 app.use("/api", productRoutes);
 
-// Simulated database
-let products = [];
-
-// Route to create a product
-app.post("/api/products", (req, res) => {
-  // Extract data from query parameters
-  const { name, description, price, imageUrl } = req.query;
-
-  // Check if all fields are provided
-  if (!name || !description || !price || !imageUrl) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
-
-  // Create a new product object
-  const newProduct = {
-    id: products.length + 1,
-    name,
-    description,
-    price: parseFloat(price),
-    imageUrl,
-  };
-
-  // Save to "database"
-  products.push(newProduct);
-
-  // Return success response
-  res
-    .status(201)
-    .json({ message: "Product created successfully", product: newProduct });
-});
-
-app.get("/api/products", getProducts);
-
-// Check if server works
+// Check if server is running
 app.get("/", (req, res) => {
   res.send("Server is running. Welcome to the API!");
 });
