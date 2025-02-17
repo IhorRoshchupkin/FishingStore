@@ -1,0 +1,7 @@
+.product-image {
+  border: 1px solid #acacac; /* Grey border */
+  border-radius: 8px; /* Закругленные края */
+  padding: 5px; /* Внутренний отступ */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  margin-top: 10%;
+}

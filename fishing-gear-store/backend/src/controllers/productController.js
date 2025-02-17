@@ -27,3 +27,22 @@ exports.createProduct = async (req, res) => {
     res.status(500).json({ error: "Failed to create product" + error });
   }
 };
+
+// Get a product by ID
+exports.getProductById = async (req, res) => {
+  const { id } = req.params; // Get the ID from the request parameters
+
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id: Number(id) }, // Search for the product by ID
+    });
+
+    if (!product) {
+      return res.status(404).json({ error: "Product was not found" });
+    }
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: "Product was not found" });
+  }
+};
