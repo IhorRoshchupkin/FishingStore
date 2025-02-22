@@ -1,50 +1,53 @@
-import { Link } from "react-router-dom";
-import "./productCard.css";
 import React from "react";
+import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import "./productCard.css";
 
 interface Product {
   id: number;
   name: string;
   description: string;
-  price: number;
-  imageUrl: string;
+  basePrice: number;
+  images: Array<{
+    id: number;
+    productId: number;
+    imageUrl: string;
+    isPrimary: boolean;
+  }>;
 }
 
 interface ProductCardProps {
-  products: Product[];
+  product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Find the image where isPrimary === true
+  const primaryImage = product.images.find((image) => image.isPrimary);
+
+  // If there is a primaryImage, use its URL, otherwise use a placeholder
+  const imageUrl = primaryImage
+    ? `http://localhost:3000${primaryImage.imageUrl}`
+    : "placeholder.jpg"; // Placeholder if no primary image
+
+  // Handler for the "View Details" button click
+  const handleViewDetails = () => {
+    navigate(`/products/${product.id}`); // Navigate to the product page
+  };
+
   return (
-    <div className="container my-4">
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-        {products.map((product) => (
-          <div key={product.id} className="col">
-            <div className="card">
-              <Link to={`/products/${product.id}`}>
-                <img
-                  src={product.imageUrl}
-                  className="card-img-top"
-                  alt={product.name}
-                />
-              </Link>
-              <div className="card-body">
-                <Link to={`/products/${product.id}`}>
-                  <h4 className="card-title">{product.name}</h4>
-                </Link>
-                <p className="card-text">{product.description}</p>
-                <p className="card-text">
-                  <strong>${product.price.toFixed(2)}</strong>
-                </p>
-                <a href="#" className="btn btn-primary">
-                  Add to Cart
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Card className="product-card">
+      <Card.Img variant="top" src={imageUrl} alt={product.name} />
+      <Card.Body>
+        <Card.Title>{product.name}</Card.Title>
+        <Card.Text>{product.description}</Card.Text>
+        <Card.Text>${product.basePrice.toFixed(2)}</Card.Text>
+        <Button variant="primary" onClick={handleViewDetails}>
+          View Details
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 

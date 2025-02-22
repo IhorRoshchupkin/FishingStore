@@ -1,37 +1,51 @@
-import React, { useState, useEffect } from "react";
-import API_URL from "../../config";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../productCard/productCard";
+import { fetchProducts } from "../../services/api";
+import { Container, Row, Col } from "react-bootstrap";
+import "./productsPage.css";
 
 interface Product {
   id: number;
   name: string;
   description: string;
-  price: number;
+  basePrice: number;
   imageUrl: string;
 }
 
-//Product page to dispay available products
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const loadProducts = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/products`);
-        const data = await response.json();
+        const data = await fetchProducts();
         setProducts(data);
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
+      } catch (err) {
+        setError("Failed to load products");
+      } finally {
+        setLoading(false);
       }
     };
-    fetchProducts();
+
+    loadProducts();
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <div>
-      <h1>Products</h1>
-      <ProductCard products={products} />
-    </div>
+    <Container className="products-page">
+      <h1 className="text-center my-4">Products</h1>
+      <Row>
+        {products.map((product) => (
+          <Col key={product.id} md={4} sm={6} xs={12} className="mb-4">
+            <ProductCard product={product} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

@@ -1,25 +1,35 @@
 const express = require("express");
-const bodyParser = require("body-parser"); // This is used to parse URL-encoded data, if needed
-const app = express();
-const PORT = 5000;
-const productRoutes = require("./routes/productRoutes"); // Ensure correct path for productRoutes
+const path = require("path");
+const categoryRoutes = require("./routes/categoryRoutes");
+const productRoutes = require("./routes/productRoutes");
+const variantRoutes = require("./routes/variantRoutes");
+const errorHandler = require("./middlewares/errorHandler");
 const cors = require("cors");
 
+const app = express();
 app.use(cors());
 
-// Middleware
-app.use(express.json()); // Parse incoming JSON data
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+// Создание папки uploads, если она не существует
+const fs = require("fs");
+const uploadsDir = path.join(__dirname, "..", "uploads");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
 
-// Use the routes for products under "/api"
-app.use("/api", productRoutes);
+app.use(express.json());
 
-// Check if server is running
-app.get("/", (req, res) => {
-  res.send("Server is running. Welcome to the API!");
-});
+// Обслуживание статических файлов из папки uploads
+app.use("/uploads", express.static(uploadsDir));
 
-// Start the server
+// Маршруты
+app.use("/api/categories", categoryRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/variants", variantRoutes);
+
+// Обработка ошибок
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

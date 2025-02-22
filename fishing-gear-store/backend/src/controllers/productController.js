@@ -1,48 +1,71 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const ProductService = require("../services/productService");
 
-// Get all products
-exports.getProducts = async (req, res) => {
+exports.getAllProducts = async (req, res) => {
   try {
-    const products = await prisma.product.findMany(); // Replace with your database logic
-    res.status(200).json(products);
+    const products = await ProductService.getAllProducts();
+    res.json(products);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch products" });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Create a new product
-exports.createProduct = async (req, res) => {
-  const { name, description, price, imageUrl } = req.body;
-
-  try {
-    const newProduct = await prisma.product.create({
-      data: { name, description, price, imageUrl },
-    });
-    res.status(201).json({
-      message: "Product created successfully",
-      product: newProduct,
-    });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to create product" + error });
-  }
-};
-
-// Get a product by ID
 exports.getProductById = async (req, res) => {
-  const { id } = req.params; // Get the ID from the request parameters
-
   try {
-    const product = await prisma.product.findUnique({
-      where: { id: Number(id) }, // Search for the product by ID
-    });
-
+    const product = await ProductService.getProductById(req.params.id);
     if (!product) {
-      return res.status(404).json({ error: "Product was not found" });
+      return res.status(404).json({ error: "Product not found" });
     }
-
-    res.status(200).json(product);
+    res.json(product);
   } catch (error) {
-    res.status(500).json({ error: "Product was not found" });
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.createProduct = async (req, res) => {
+  try {
+    const newProduct = await ProductService.createProduct(req.body);
+    res.status(201).json(newProduct);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.updateProduct = async (req, res) => {
+  try {
+    const updatedProduct = await ProductService.updateProduct(
+      req.params.id,
+      req.body
+    );
+    res.json(updatedProduct);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    await ProductService.deleteProduct(req.params.id);
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.uploadProductImage = async (req, res) => {
+  try {
+    const productId = parseInt(req.params.id);
+    const imageUrl = `/uploads/${req.file.filename}`; // Path to the uploaded file
+    const isPrimary = req.body.isPrimary === "true"; // isPrimary parameter from the request body
+
+    // Save image information in the database
+    const newImage = await ProductService.addProductImage(
+      productId,
+      imageUrl,
+      isPrimary
+    );
+
+    res.status(201).json(newImage);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

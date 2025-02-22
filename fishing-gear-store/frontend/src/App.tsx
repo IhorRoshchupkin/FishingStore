@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "../src/components/header/header";
 import Footer from "../src/components/footer/footer";
-import ProductCard from "../src/components/productCard/productCard";
 import ProductsPage from "./components/productsPage/productsPage";
-import ProductDetailPage from "./components/productDetailPage/productDetailPage";
+import ProductPage from "./components/productPage/productPage"; // Import ProductPage
 import React from "react";
 
 const App = () => {
@@ -19,8 +18,8 @@ const App = () => {
             {/* Products Page */}
             <Route path="/products" element={<ProductsPage />} />
 
-            {/* Products Page */}
-            <Route path="/products/:id" element={<ProductDetailPage />} />
+            {/* Product Details Page */}
+            <Route path="/products/:id" element={<ProductPage />} />
 
             {/* 404 Page */}
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />

@@ -1,29 +1,32 @@
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+/* productPage.css */
+.product-page {
   padding: 20px;
+  margin-top: 50px;
 }
 
-.product-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  background-color: #f9f9f9;
+.product-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
-.product-card img {
-  max-width: 100%;
+.image-gallery {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.image-gallery img {
+  max-width: 100px;
   height: auto;
   border-radius: 8px;
 }
 
-.product-card h3 {
-  margin: 12px 0;
+.carousel {
+  max-width: 600px; /* Limit the width of the carousel */
+  margin: 0 auto; /* Center the carousel */
 }
 
-.product-card p {
-  margin: 8px 0;
-  color: #555;
+.carousel img {
+  max-height: 400px; /* Limit the height of the images */
+  object-fit: cover; /* Maintain the aspect ratio of the images */
 }

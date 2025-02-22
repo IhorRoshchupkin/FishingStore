@@ -1,19 +1,17 @@
 const express = require("express");
-const {
-  getProducts,
-  createProduct,
-  getProductById,
-} = require("../controllers/productController"); // Ensure the correct path for the controller
-
 const router = express.Router();
+const productController = require("../controllers/productController");
+const upload = require("../middlewares/uploadMiddleware");
 
-// GET all products
-router.get("/products", getProducts);
-
-// POST create a new product
-router.post("/products", createProduct);
-
-// GET a product by ID
-router.get("/products/:id", getProductById);
+router.get("/", productController.getAllProducts);
+router.get("/:id", productController.getProductById);
+router.post("/", productController.createProduct);
+router.put("/:id", productController.updateProduct);
+router.delete("/:id", productController.deleteProduct);
+router.post(
+  "/:id/images",
+  upload.single("image"),
+  productController.uploadProductImage
+);
 
 module.exports = router;
