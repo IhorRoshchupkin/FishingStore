@@ -4,6 +4,8 @@ import Footer from "../src/components/footer/footer";
 import ProductsPage from "./components/productsPage/productsPage";
 import ProductPage from "./components/productPage/productPage"; // Import ProductPage
 import React from "react";
+import LoginPage from "./components/loginPage/loginPage";
+import RegisterPage from "./components/registerPage/registerPage";
 
 const App = () => {
   return (
@@ -14,6 +16,12 @@ const App = () => {
           <Routes>
             {/* Home Page */}
             <Route path="/" element={<h1>Welcome to Fishing Gear Store!</h1>} />
+
+            {/* Login Page */}
+            <Route path="/login" element={<LoginPage />} />
+
+            {/* Register Page */}
+            <Route path="/register" element={<RegisterPage />} />
 
             {/* Products Page */}
             <Route path="/products" element={<ProductsPage />} />

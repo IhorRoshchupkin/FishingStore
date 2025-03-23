@@ -1,0 +1,24 @@
+/* Buttons */
+.Button-group {
+  padding: 10px 0;
+}
+
+/* Login button */
+.btn-primary {
+  background-color: #2381fc;
+  color: #fff;
+  border: none;
+  margin: 0 10px 0 0px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Register button */
+.btn-secondary {
+  background-color: #2381fc;
+  color: #fff;
+  border: none;
+  margin: 0 0 0 0px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}

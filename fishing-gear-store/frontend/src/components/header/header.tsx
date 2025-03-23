@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./header.css";
 import Navbar from "../navbar/navbar";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -22,7 +23,10 @@ const Header = () => {
 
           {/* Login and shopping card */}
           <div className="d-flex align-items-center">
-            <button className="btn btn-outline-primary me-3">Login</button>
+            <Link className="nav-link" to="/login">
+              <button className="btn btn-outline-primary me-3">Login</button>
+            </Link>
+
             <button className="btn btn-primary">🛒 Shopping Cart</button>
           </div>
         </div>

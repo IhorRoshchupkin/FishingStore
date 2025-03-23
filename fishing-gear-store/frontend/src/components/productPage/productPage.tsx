@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchProductById } from "../../services/api";
-import { Container, Card, Carousel } from "react-bootstrap"; // Import Carousel
+import { Container, Card, Carousel, Row, Col, Button } from "react-bootstrap"; // Import Row and Col
 import "./productPage.css";
 
 interface Product {
@@ -39,6 +39,10 @@ const ProductPage = () => {
     loadProduct();
   }, [id]);
 
+  const handleAddToCart = () => {
+    alert(`Product "${product?.name}" added to the card!`);
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!product) return <div>Product not found</div>;
@@ -52,22 +56,41 @@ const ProductPage = () => {
     <Container className="product-page">
       <h1 className="text-center my-4">{product.name}</h1>
       <Card>
-        {/* Image carousel */}
-        <Carousel>
-          {sortedImages.map((image, index) => (
-            <Carousel.Item key={image.id}>
-              <img
-                className="d-block w-100"
-                src={`http://localhost:3000${image.imageUrl}`} // Full URL
-                alt={`Product Image ${index + 1}`}
-              />
-            </Carousel.Item>
-          ))}
-        </Carousel>
+        {/* Use Bootstrap Grid for layout */}
+        <Row className="g-43">
+          {/* Left column: Carousel */}
+          <Col md={6}>
+            <div className="carousel-container">
+              <Carousel interval={null}>
+                {sortedImages.map((image, index) => (
+                  <Carousel.Item key={image.id}>
+                    <img
+                      className="d-block w-100"
+                      src={`http://localhost:3000${image.imageUrl}`}
+                      alt={`Product Image ${index + 1}`}
+                    />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            </div>
+          </Col>
 
-        <Card.Body>
+          {/* Right column: Product name and price */}
+          <Col md={6} className="d-flex align-items-start">
+            <div className="info-section">
+              <h2>{product.name}</h2>
+              <p className="price">${product.basePrice.toFixed(2)}</p>
+              <Button variant="primary" onClick={handleAddToCart}>
+                Add to the shopping cart
+              </Button>
+            </div>
+          </Col>
+        </Row>
+
+        {/* Bottom section: Description and variants */}
+        <Card.Body className="details-section">
+          <h3>Product Details</h3>
           <Card.Text>{product.description}</Card.Text>
-          <Card.Text>${product.basePrice.toFixed(2)}</Card.Text>
           <h4>Variants</h4>
           <ul>
             {product.variants.map((variant, index) => (

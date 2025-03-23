@@ -7,6 +7,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  password_hash String
+  first_name    String?
+  last_name     String?
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @updatedAt
+  is_active     Boolean        @default(true)
+  profile       UserProfile?   
+  roles         Role[]         @relation("UserRoles") 
+  userRoles     UserRole[]     // Обратная ссылка на UserRole
+}
+
+model UserProfile {
+  id         Int      @id @default(autoincrement())
+  phone      String?
+  address    String?
+  city       String?
+  country    String?
+  birth_date DateTime?
+  avatar_url String?
+  user       User     @relation(fields: [userId], references: [id]) 
+  userId     Int      @unique
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]  @relation("UserRoles") 
+  userRoles UserRole[] // Обратная ссылка на UserRole
+}
+
+model UserRole {
+  user   User   @relation(fields: [userId], references: [id]) 
+  role   Role   @relation(fields: [roleId], references: [id]) 
+  userId Int
+  roleId Int
+
+  @@id([userId, roleId]) 
+}
+
 model Category {
   id   Int    @id @default(autoincrement())
   name String

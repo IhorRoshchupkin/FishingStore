@@ -1,32 +1,74 @@
 /* productPage.css */
+
+/* Main container for the product page */
 .product-page {
-  padding: 20px;
-  margin-top: 50px;
+  max-width: 1200px; /* Limit the page width */
+  margin: 0 auto; /* Center the page */
 }
 
-.product-page h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.image-gallery {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.image-gallery img {
-  max-width: 100px;
-  height: auto;
-  border-radius: 8px;
-}
-
-.carousel {
-  max-width: 600px; /* Limit the width of the carousel */
+/* Border around the carousel */
+.carousel-container {
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow */
+  width: 400px;
+  height: 400px;
   margin: 0 auto; /* Center the carousel */
 }
 
-.carousel img {
-  max-height: 400px; /* Limit the height of the images */
-  object-fit: cover; /* Maintain the aspect ratio of the images */
+/* Styles for "Previous" and "Next" buttons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #000; /* Black background */
+  border-radius: 50%; /* Make buttons round */
+  padding: 10px; /* Increase button size */
+}
+
+/* Styles for indicators (dots) */
+.carousel-indicators button {
+  background-color: #000; /* Black color for indicators */
+  border-radius: 50%; /* Make indicators round */
+  width: 10px; /* Indicator width */
+  height: 10px; /* Indicator height */
+  margin: 0 5px; /* Margin between indicators */
+}
+
+/* Active indicator */
+.carousel-indicators .active {
+  background-color: #555; /* Gray color for the active indicator */
+}
+
+/* Right column: Product name and price */
+.info-section h2 {
+  font-size: 2rem; /* Font size for the product name */
+  margin-bottom: 10px;
+  margin-top: 20px; /* Bottom margin */
+}
+
+.info-section .price {
+  font-size: 1.5rem; /* Font size for the price */
+  color: #333; /* Text color */
+  font-weight: bold; /* Bold text */
+}
+
+/* Bottom section: Description and variants */
+.details-section {
+  text-align: left; /* Center-align text */
+  padding: 20px; /* Inner padding */
+}
+
+.details-section h4 {
+  margin-top: 20px; /* Top margin */
+}
+
+.details-section ul {
+  list-style-type: none; /* Remove list bullets */
+  padding: 0; /* Remove padding */
+}
+
+.details-section li {
+  margin: 10px 0; /* Margin between list items */
+}
+
+.details-section h3 {
+  margin-top: 20px; /* Top margin */
 }
