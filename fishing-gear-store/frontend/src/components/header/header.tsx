@@ -1,16 +1,32 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./header.css";
 import Navbar from "../navbar/navbar";
+import { useSelector, useDispatch } from "react-redux";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../../app/store";
+import { logout } from "../../features/auth/authSlice";
 
 const Header = () => {
+  const { isAuthenticated, user } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <header className="bg-white shadow-sm w-100">
       <div className="container-fluid">
         <div className="d-flex justify-content-between align-items-center py-3">
           {/* Logo */}
-          <div className="logo text-primary fs-4 fw-bold">Fishing Gear</div>
+          <Link className="nav-link" to="/">
+            <div className="logo text-primary fs-4 fw-bold">Fishing Gear</div>
+          </Link>
 
           {/* Searching bar */}
           <div className="flex-grow-1 mx-3">
@@ -23,10 +39,19 @@ const Header = () => {
 
           {/* Login and shopping card */}
           <div className="d-flex align-items-center">
-            <Link className="nav-link" to="/login">
-              <button className="btn btn-outline-primary me-3">Login</button>
-            </Link>
-
+            {isAuthenticated ? (
+              <div>
+                <Link className="nav-link" to="/userProfile">
+                  <button className="btn btn-outline-primary me-3">
+                    Account
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <Link className="nav-link" to="/login">
+                <button className="btn btn-outline-primary me-3">Login</button>
+              </Link>
+            )}
             <button className="btn btn-primary">🛒 Shopping Cart</button>
           </div>
         </div>
