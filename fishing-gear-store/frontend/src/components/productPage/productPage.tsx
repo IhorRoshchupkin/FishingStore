@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchProductById } from "../../services/api";
 import { Container, Card, Carousel, Row, Col, Button } from "react-bootstrap"; // Import Row and Col

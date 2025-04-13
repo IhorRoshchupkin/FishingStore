@@ -1,11 +1,7 @@
 import "./registerPage.css";
-import React from "react";
 import { Button, Card, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="register-page">
       <Card className="register-card">

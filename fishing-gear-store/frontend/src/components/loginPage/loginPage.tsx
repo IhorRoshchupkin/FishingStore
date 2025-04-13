@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./loginPage.css";
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { userLogin } from "../../services/api";

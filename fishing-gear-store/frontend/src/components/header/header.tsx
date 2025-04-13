@@ -1,23 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./header.css";
 import Navbar from "../navbar/navbar";
-import { useSelector, useDispatch } from "react-redux";
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { RootState } from "../../app/store";
-import { logout } from "../../features/auth/authSlice";
 
 const Header = () => {
-  const { isAuthenticated, user } = useSelector(
-    (state: RootState) => state.auth
-  );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  };
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   return (
     <header className="bg-white shadow-sm w-100">
@@ -41,7 +30,7 @@ const Header = () => {
           <div className="d-flex align-items-center">
             {isAuthenticated ? (
               <div>
-                <Link className="nav-link" to="/userProfile">
+                <Link className="nav-link" to="/userAccount">
                   <button className="btn btn-outline-primary me-3">
                     Account
                   </button>

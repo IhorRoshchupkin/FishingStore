@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../productCard/productCard";
 import { fetchProducts } from "../../services/api";
 import { Container, Row, Col } from "react-bootstrap";
@@ -10,6 +10,12 @@ interface Product {
   description: string;
   basePrice: number;
   imageUrl: string;
+  images: Array<{
+    id: number;
+    productId: number;
+    imageUrl: string;
+    isPrimary: boolean;
+  }>;
 }
 
 const ProductsPage = () => {

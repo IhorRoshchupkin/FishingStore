@@ -10,9 +10,11 @@
 .carousel-container {
   border-radius: 10px; /* Rounded corners */
   overflow: hidden; /* Hide overflow */
+  box-shadow: #000 0px 0px 10px; /* Shadow effect */
   width: 400px;
   height: 400px;
-  margin: 0 auto; /* Center the carousel */
+
+  /* margin: 0 auto; Center the carousel */
 }
 
 /* Styles for "Previous" and "Next" buttons */

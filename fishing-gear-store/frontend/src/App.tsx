@@ -3,11 +3,11 @@ import Header from "../src/components/header/header";
 import Footer from "../src/components/footer/footer";
 import ProductsPage from "./components/productsPage/productsPage";
 import ProductPage from "./components/productPage/productPage"; // Import ProductPage
-import React from "react";
 import LoginPage from "./components/loginPage/loginPage";
 import RegisterPage from "./components/registerPage/registerPage";
 import { Provider } from "react-redux";
 import { store } from "./app/store"; // Import store
+import UserAccount from "./components/userAccount/userAccount";
 
 const App = () => {
   return (
@@ -25,6 +25,9 @@ const App = () => {
 
               {/* Login Page */}
               <Route path="/login" element={<LoginPage />} />
+
+              {/* User Account Page */}
+              <Route path="/userAccount" element={<UserAccount />} />
 
               {/* Register Page */}
               <Route path="/register" element={<RegisterPage />} />
